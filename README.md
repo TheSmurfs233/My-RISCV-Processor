@@ -95,7 +95,7 @@ int main(void)
 ```
 D:.
 ├─.vscode
-├─docs				# 包括RISC-V官方文档，SoC外设开发设计方案，学习笔记灯
+├─docs				# 包括RISC-V官方文档，SoC外设开发设计方案，学习笔记等
 ├─img				# 图片资源
 ├─lib				# 为SoC编写的类STM32标准库函数
 ├─tests				# 指令集测试文件夹
