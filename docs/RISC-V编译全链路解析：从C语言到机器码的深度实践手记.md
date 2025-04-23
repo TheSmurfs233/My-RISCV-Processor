@@ -59,7 +59,7 @@
 
 交叉编译环境（Cross-Compilation Environment）是指在一台计算机（主机平台，Host）上编译生成能在另一台不同架构的计算机（目标平台，Target）上运行的程序或系统的开发环境。它的核心是交叉编译器（Cross-Compiler），将源代码转换为目标平台的可执行代码。
 
-![image-20250406181812424](../../RISCV/doc/img/rv-img-0.png)
+![image-20250406181812424](../img/rv-img-0.png)
 
 ##### 为什么需要交叉编译环境？
 
@@ -138,7 +138,7 @@
    -  riscv64-unknown-elf-*：riscv64 指目标架构，unknown 表示厂商未知，elf 表示输出格式。
    -  riscv64-unknown-linux-gnu-*：linux-gnu 表示目标系统为 Linux。
 
-   ![image-20250406184336383](../../RISCV/doc/img/rv-img-1.png)
+   ![image-20250406184336383](../img/rv-img-1.png)
 
 2. 本文中使用预编译的gnu release版本
 
@@ -170,7 +170,7 @@ WSL（全称 Windows Subsystem for Linux）是微软为 Windows 10/11 操作系�
 
 安装编译完成RISC-V交叉编译器后在终端中运行命令`riscv32-unknown-linux-gnu-gcc -v`，提示以下信息证明交叉编译环境编译安装成功
 
-![image-20250406185706359](../../RISCV/doc/img/rv-img-2.png)
+![image-20250406185706359](../img/rv-img-2.png)
 
 ## 3. 完整编译流程
 
@@ -225,7 +225,7 @@ riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -nostdlib -o x.elf start.s main
 
 `-o x.elf`  指定输出文件名为 `x.elf`
 
-![image-20250407130348037](../../RISCV/doc/img/rv-img-3.png)
+![image-20250407130348037](../img/rv-img-3.png)
 
 生成一个`.elf`文件，使用`file x.elf`命令查看文件类型
 
@@ -563,7 +563,7 @@ hexdump -v -e '1/4 "%08x\n"'  data.bin > data.hex
 
 在终端中运行上面指令
 
-![image-20250407143926958](../../RISCV/doc/img/rv-img-4.png)
+![image-20250407143926958](../img/rv-img-4.png)
 
 成功输出两个二进制文件，运行 `od` 命令查看
 
@@ -585,7 +585,7 @@ qaq@DESKTOP-I8GGJRG:~/soc$ od text.bin
 
 再使用上面命令将二进制文件输出为十六进制文件
 
-![image-20250407144321752](../../RISCV/doc/img/rv-img-5.png)
+![image-20250407144321752](../img/rv-img-5.png)
 
 将其复制到工程目录下面，这样在工程中就可以导入hex文件到指令存储器中
 
