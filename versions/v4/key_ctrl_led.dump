@@ -1,0 +1,49 @@
+.section .text
+.global _start
+
+_start:
+    # 设置栈指针（根据具体内存布局调整）
+    la sp, stack_top
+    
+    # 配置GPIO控制寄存器（GPIO0输入模式，GPIO1输出模式）
+    li t0, 0x10000000       # GPIO控制寄存器地址
+    li t1, 0x0000000A       # 二进制b'0000...00_00_10_10' (GPIO1=01输出，GPIO0=10输入)
+    sw t1, 0(t0)            # 写入控制寄存器
+    
+main_loop:
+    # 读取GPIO数据寄存器
+    li t0, 0x10000004       # GPIO数据寄存器地址
+    lw t1, 0(t0)            # 读取当前数据值
+    
+    # 提取GPIO0状态（按键输入）
+    andi t2, t1, 0x1        # 掩码获取bit0
+    
+    # 根据输入状态设置GPIO1（LED输出）
+    beqz t2, led_off        # 如果按键未按下（0），关闭LED
+    li t3, 0x2              # 准备设置bit1（LED亮）
+    j update_led
+led_off:
+    li t3, 0x0              # 准备清除bit1（LED灭）
+
+update_led:
+    # 保留其他位状态，只修改bit1
+    andi t1, t1, 0xFFFD     # 清除bit1
+    or t1, t1, t3           # 设置新的LED状态
+    
+    # 写回GPIO数据寄存器
+    sw t1, 0(t0)
+    
+    # 简单延时（根据CPU频率调整）
+    li a0, 500000           # 延时计数器
+delay_loop:
+    addi a0, a0, -1
+    bnez a0, delay_loop
+    
+    j main_loop             # 循环检测
+
+# 栈空间分配（示例大小）
+.section .bss
+.align 4
+stack_base:
+    .space 1024
+stack_top:

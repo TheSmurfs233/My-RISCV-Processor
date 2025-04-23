@@ -1,0 +1,23 @@
+Address     Code        Basic                        Line Source
+
+0x00400000  0x00002537  lui x10,2                    5        li   a0, 0x2000          # GPIO 基地址
+0x00400004  0x00050513  addi x10,x10,0                    
+0x00400008  0x00600593  addi x11,x0,6                6        li   a1, 0x6             # 控制字: GPIO0=输入(10), GPIO1=输出(01) → 0b0110 = 0x6
+0x0040000c  0x00b52023  sw x11,0(x10)                7        sw   a1, 0(a0)           # 写入 GPIO_CTRL (地址 0x2000)
+0x00400010  0x00452603  lw x12,4(x10)                11       lw   a2, 4(a0)           # a2 = gpio_data 的值
+0x00400014  0x00167693  andi x13,x12,1               14       andi a3, a2, 0x1         # 提取 GPIO0 的值（掩码 0x1）
+0x00400018  0x00068663  beq x13,x0,0x0000000c        15       beqz a3, led_on          # 如果按键按下（假设低电平有效），跳转至 led_on
+0x0040001c  0x00000593  addi x11,x0,0                19       li   a1, 0x0             # 数据: GPIO1=0
+0x00400020  0x0080006f  jal x0,0x00000008            20       j    update_led
+0x00400024  0x00200593  addi x11,x0,2                24       li   a1, 0x2             # 数据: GPIO1=1 (二进制 0b10 = 0x2)
+0x00400028  0x00452603  lw x12,4(x10)                28       lw   a2, 4(a0)           # 读取当前 gpio_data
+0x0040002c  0x00010737  lui x14,16                   29       li   a4, 0xFFFD          # 加载 32 位掩码到寄存器 a4
+0x00400030  0xffd70713  addi x14,x14,0xfffffffd           
+0x00400034  0x00e67633  and x12,x12,x14              30       and  a2, a2, a4      # 清除 GPIO1 的 bit1 (掩码 0xFFFD = ~0x2)
+0x00400038  0x00b66633  or x12,x12,x11               31       or   a2, a2, a1          # 设置 GPIO1 的值
+0x0040003c  0x00c52223  sw x12,4(x10)                32       sw   a2, 4(a0)           # 写入 GPIO_DATA (地址 0x2004)
+0x00400040  0x000186b7  lui x13,24                   35       li   a3, 100000          # 延时计数器
+0x00400044  0x6a068693  addi x13,x13,0x000006a0           
+0x00400048  0xfff68693  addi x13,x13,0xffffffff      37       addi a3, a3, -1
+0x0040004c  0xfe069ee3  bne x13,x0,0xfffffffc        38       bnez a3, delay_loop
+0x00400050  0xfc1ff06f  jal x0,0xffffffc0            40       j    main_loop           # 循环检测
