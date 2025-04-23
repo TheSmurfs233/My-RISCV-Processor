@@ -92,3 +92,36 @@ int main(void)
 
 ### 五、📚文档体系
 
+```
+D:.
+├─.vscode
+├─docs				# 包括RISC-V官方文档，SoC外设开发设计方案，学习笔记灯
+├─img				# 图片资源
+├─lib				# 为SoC编写的类STM32标准库函数
+├─tests				# 指令集测试文件夹
+│  └─inst				# 十六进制指令文件
+│      └─dump			# 反汇编文件
+└─versions	 		# 历史版本存档（保留完整开发记录）
+    ├─v1
+    │  ├─sim		# 仿真文件
+    │  └─src		# 该版本的Verilog源码
+    │      └─core	# 核心模块
+   ···
+    ├─v8
+    │  ├─cons		# 约束文件
+    │  ├─sim
+    │  └─src
+    │      ├─bus		# 总线模块
+    │      ├─core	
+    │      ├─mul_div	# 乘除法模块
+    │      └─perips		# 外设模块
+    └─v9
+        ├─cons
+        ├─sim
+        └─src
+            ├─bus
+            ├─core
+            ├─mul_div
+            └─perips
+```
+
