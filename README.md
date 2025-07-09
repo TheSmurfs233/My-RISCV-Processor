@@ -35,7 +35,31 @@
 
 ![arch](img/arch2.png)
 
-### 三、🛠️版本演进
+### 三、📺成果展示
+
+### 📽️ 视频一：RISC-V SoC指令集测试仿真
+
+视频聚焦硬件核心验证完整展示了**RISC-V指令集的硬件验证流程**，以ADD指令为例进行深度演示。
+
+[![vedio_face](/img/封面-指令集测试仿真.png)](https://www.bilibili.com/video/BV1AmGWzQEgd/?share_source=copy_web&vd_source=8cff0e6714fe99d1316c9498f7133138)
+
+点击上面图片即可跳转播放视频（视频链接：https://www.bilibili.com/video/BV1AmGWzQEgd/?share_source=copy_web&vd_source=8cff0e6714fe99d1316c9498f7133138 ）
+
+
+
+### 📽️ 视频二：RISC-V SoC嵌入式开发测试
+
+视频展示了完整的嵌入式开发链：从C语言编写外设驱动（GPIO/定时器/数码管），到Makefile自动化编译、链接脚本定制内存布局，最终通过串口下载实现——按键控制LED、定时器、LED状态翻转和数码管动态显示（0.00-9.99）例程，充分验证了SoC的实用性和开发便捷性。
+
+[![vedio_face](/img/封面-嵌入式开发测试.png)](https://www.bilibili.com/video/BV17JGAznEnj/?share_source=copy_web&vd_source=8cff0e6714fe99d1316c9498f7133138)
+
+点击上面图片即可跳转播放视频（视频链接：https://www.bilibili.com/video/BV17JGAznEnj/?share_source=copy_web&vd_source=8cff0e6714fe99d1316c9498f7133138 ）
+
+
+
+两个视频共同构成了从指令集到应用层的闭环验证，体现了五级流水线设计的稳定性和外设集成能力。
+
+### 四、🛠️版本演进
 
 | 版本 |                           关键创新                           |       资源优化       | 主频提升 |
 | :--: | :----------------------------------------------------------: | :------------------: | :------: |
@@ -50,7 +74,7 @@
 |  v9  |                       完善整体SoC设计                        |  7672 LUT / 4810 FF  | 110 MHz  |
 | v10  |                      为SoC增加下载功能                       |          -           |    -     |
 
-### 四、📡嵌入式开发库（类STM32标准库）
+### 五、📡嵌入式开发库（类STM32标准库）
 
 基于SoC提供**外设驱动库**，支持以下关键功能实现：
 
@@ -91,7 +115,7 @@ int main(void)
 }
 ```
 
-### 五、📚文档体系
+### 六、📚文档体系
 
 ```
 D:.
